@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Money Drop</title>
+    <style>
+        body {
+            overflow: hidden; /* Empêche le défilement et cache tout contenu qui dépasse */
+            margin: 0; /* Supprime la marge par défaut du body */
+            font-family: 'Arial', sans-serif; /* Utilisation d'une police de caractères générique */
+        }
+        .hero-section {
+            background-image: url("{% static 'images/The-Money-Drop.png' %}");
+            background-size: cover; /* Ajuste la taille pour couvrir toute la section */
+            background-position: top center;
+            height: 100vh; /* Hauteur de la section égale à la hauteur de l'écran */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #000; /* Couleur du texte */
+            font-size: 24px;
+        }
+        .hero-section h1 {
+            font-size: 3em; /* Taille de la police pour le titre */
+        }
+        .action-button {
+            background-color: #3498DB; /* Couleur de fond du bouton */
+            color: white; /* Couleur du texte du bouton */
+            text-decoration: none; /* Pas de soulignement du texte */
+            padding: 10px 40px; /* Espacement intérieur du bouton */
+            border-radius: 10px; /* Coins arrondis */
+            font-family: 'Pacifico', cursive; /* Police spécifique pour le texte */
+            border-bottom: 5px solid #2980B9; /* Bordure basse du bouton */
+            text-shadow: 0px -2px #2980B9; /* Ombre du texte */
+            transition: all .1s; /* Animation de transition */
+            -webkit-transition: all .1s; /* Animation de transition pour navigateurs WebKit */
+            display: inline-block; /* Affichage en ligne pour le bouton */
+            margin-top: 20px; /* Marge en haut du bouton */
+            margin-right: 10px; /* Marge à droite du bouton */
+        }
+        .action-button:hover {
+            background-color: #2980B9; /* Changement de couleur de fond au survol */
+        }
+        .action-button:active {
+            transform: translate(0, 5px); /* Décalage vers le bas au clic */
+            -webkit-transform: translate(0, 5px); /* Décalage pour navigateurs WebKit */
+            border-bottom: 1px solid; /* Bordure basse plus fine */
+        }
+
+        /* Style de la barre de navigation */
+        .navbar {
+            background-color: #333; /* Couleur de fond de la barre de navigation */
+            overflow: hidden; /* Empêche le débordement du contenu */
+            position: fixed; /* Position fixée en haut de la page */
+            width: 100%; /* Largeur à 100% de la page */
+            z-index: 1000; /* Place au-dessus de tous les autres éléments */
+            top: 0; /* Fixe en haut */
+        }
+
+        /* Style des liens de la barre de navigation */
+        .navbar a {
+            float: left; /* Alignement des liens à gauche */
+            display: block; /* Affichage en bloc pour chaque lien */
+            color: #f2f2f2; /* Couleur du texte */
+            text-align: center; /* Alignement du texte au centre */
+            padding: 14px 16px; /* Espacement intérieur des liens */
+            text-decoration: none; /* Pas de soulignement */
+            font-size: 17px; /* Taille de la police */
+        }
+
+        /* Changement de couleur au survol des liens */
+        .navbar a:hover {
+            background-color: #ddd; /* Couleur de fond au survol */
+            color: black; /* Changement de couleur du texte */
+        }
+
+        /* Style du lien actif */
+        .active {
+            background-color: #4CAF50; /* Couleur de fond du lien actif */
+            color: white; /* Couleur du texte du lien actif */
+        }
+
+        /* Style de l'image du bouton mute/unmute */
+        .mute-button img {
+            width: 30px; /* Largeur de l'image */
+            height: 30px; /* Hauteur de l'image */
+            cursor: pointer; /* Curseur pointeur */
+        }
+    </style>
+</head>
+<body>
+    <!-- Balise audio pour la musique d'accueil -->
+    <audio id="musique_accueil" autoplay loop>
+        <source src="{% static 'audio/musique_accueil.mp3' %}" type="audio/mpeg">
+        <!-- Incluez ici d'autres formats audio si nécessaire pour une compatibilité étendue -->
+        Your browser does not support the audio element.
+    </audio>
+    <audio autoplay loop src="{% static 'audio/musique_accueil.mp3' %}"></audio>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a class="active" href="#">Accueil</a>
+        <a href="#">Participer en tant que joueur</a>
+        <a href="#">Participer en tant qu'admin</a>
+        <a href="#">Se connecter en tant qu'admin</a>
+        <a href="#">Historique des jeux</a>
+        <div class="mute-button" onclick="toggleMute()">
+            <img id="mute-icon" src="{% static 'images/unmute.png' %}" alt="Mute/Unmute">
+        </div>
+    </div>
+
+    <!-- Section principale de la page -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Bienvenue sur Money Drop</h1>
+            <p>Découvrez le jeu palpitant où les défis financiers vous attendent à chaque tournant.</p>
+        
+            <a href="#" class="action-button">
+                Observer une partie en cours
+            </a>
+            <a href="javascript:void(0)" onclick="changeState(0)" class="btn active">Play</a>
+            <a href="javascript:void(0)" onclick="changeState(1)" class="btn">Pause</a>
+            <a href="javascript:void(0)" onclick="changeState(2)" class="btn">Stop</a>
+        </div>
+    </section>
+    <!-- Autres sections de votre page -->
+
+    <script>
+        function toggleMute() {
+            var audio = document.getElementById('musique_accueil');
+            var muteIcon = document.getElementById('mute-icon');
+            if (audio.muted) {
+                audio.muted = false;
+                muteIcon.src = "{% static 'images/unmute.png' %}";
+            } else {
+                audio.muted = true;
+                muteIcon.src = "{% static 'images/mute.png' %}";
+            }
+        }
+
+        function changeState(x) {
+            let btns = document.querySelectorAll(".btn");
+            let audio = document.querySelector("#musique_accueil");
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
+            btns[x].classList.add("active");
+
+            if (x == 0) {
+                audio.play();
+            }
+            if (x == 1) {
+                audio.pause();
+            }
+            if (x == 2) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
+    </script>
+</body>
+</html>

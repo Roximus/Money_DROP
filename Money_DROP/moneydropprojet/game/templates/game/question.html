@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles pour les boîtes */
+        .answer-box {
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            border: 2px solid #ccc;
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Style pour les réponses sélectionnées */
+        .answer-box:checked {
+            background-color: lightblue;
+        }
+
+        /* Styles pour les labels */
+        .answer-label {
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Question</h1>
+    <p>{{ game_session.current_question.question_text }}</p>
+    <form onsubmit="return submitAnswer()">
+        {% csrf_token %}
+        <input type="radio" id="answer_a" name="answer" class="answer-box" value="a">
+        <label for="answer_a" class="answer-label">{{ game_session.current_question.answer_a }}</label><br>
+        <input type="radio" id="answer_b" name="answer" class="answer-box" value="b">
+        <label for="answer_b" class="answer-label">{{ game_session.current_question.answer_b }}</label><br>
+        <input type="radio" id="answer_c" name="answer" class="answer-box" value="c">
+        <label for="answer_c" class="answer-label">{{ game_session.current_question.answer_c }}</label><br>
+        <input type="radio" id="answer_d" name="answer" class="answer-box" value="d">
+        <label for="answer_d" class="answer-label">{{ game_session.current_question.answer_d }}</label><br>
+        <button type="submit">Soumettre</button>
+    </form>
+
+    <div id="timer"></div>
+    <audio id="attente" src="{% static 'audio/attente.mp3' %}"></audio>
+    <audio id="bonne réponse" src="{% static 'audio/bonne réponse.mp3' %}"></audio>
+    <audio id="mauvaise réponse" src="{% static 'audio/mauvaise réponse.mp3' %}"></audio>
+    
+    <script src="script.js">
+        var duration = {{ game_session.duration }}; // Durée du jeu en secondes
+        var timerDisplay = document.getElementById("timer");
+
+        
+
+
+        
+
+
+        startTimer(); // Démarrez le timer lorsque la page est chargée
+
+   
+        playWaitingAudio();
+
+      
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Drop - Jeu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Money Drop - Le Jeu</h1>
+    </header>
+    <main>
+        <section class="question-section">
+            <h2>Question 1:</h2>
+            <p>Quel est le plus grand océan du monde?</p>
+            <div class="answers">
+                <button class="answer" data-sound="sound1">Océan Atlantique</button>
+                <button class="answer" data-sound="sound2">Océan Indien</button>
+                <button class="answer" data-sound="sound3">Océan Pacifique</button>
+                <button class="answer" data-sound="sound4">Océan Arctique</button>
+            </div>
+        </section>
+    </main>
+    <audio id="sound1" src="sons/attente.mp3"></audio>
+    <audio id="sound2" src="sons/bonne réponse.mp3"></audio>
+    <audio id="sound3" src="sons/intro.mp3"></audio>
+    <audio id="sound4" src="sons/mauvaise réponse.mp3"></audio>
+    <footer>
+        <p>&copy; 2024 Money Drop. Tous droits réservés.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

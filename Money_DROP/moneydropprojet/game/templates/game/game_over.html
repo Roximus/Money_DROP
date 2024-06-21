@@ -1,0 +1,12 @@
+<!-- game/templates/game/game_over.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Over</title>
+</head>
+<body>
+    <h1>Game Over</h1>
+    <p>{{ message }}</p>
+    <a href="{% url 'game:start' %}">Play Again</a>
+</body>
+</html>
